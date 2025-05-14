@@ -13,19 +13,23 @@ print('starting to go through UW login...\n')
 time.sleep(1)
 
 register = driver.find_element("css selector", '.mt-8.mdc-button.mdc-button--outlined')
+print(register)
 register.click()
 
-time.sleep(0.5)
+time.sleep(1)
+
+with open('./secret/username.txt', 'r') as file:
+  user_netid = file.read()
 
 username = driver.find_element(By.ID, 'username')
-username.send_keys('rasmus1@uw.edu')
+username.send_keys(user_netid + '@uw.edu')
 
-time.sleep(0.5)
+time.sleep(1)
 
 next = driver.find_element(By.CLASS_NAME, 'mdc-button')
 next.click()
 
-time.sleep(0.5)
+time.sleep(1)
 
 uw_btn = driver.find_element(By.CLASS_NAME, 'mdc-button')
 uw_btn.click()
@@ -35,7 +39,7 @@ time.sleep(1)
 print('inputting username and password...\n')
 
 netid = driver.find_element(By.ID, 'weblogin_netid')
-netid.send_keys('rasmus1')
+netid.send_keys(user_netid)
 
 with open('./secret/secret_password.txt', 'r') as file:
   secret_password = file.read()
