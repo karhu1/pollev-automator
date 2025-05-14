@@ -102,8 +102,8 @@ print('starting to fetch for changes!\n')
 while True:
   changes = fetch_changes()
   if changes:
-    # print("DOM changed:", change)
-    time.sleep(0.5)
+    print("DOM changed!")
+    time.sleep(20)
     buttons = driver.find_elements(By.CLASS_NAME, 'component-response-multiple-choice__option__vote')
     if buttons:
       buttons[random.randint(0, len(buttons)-1)].click()
