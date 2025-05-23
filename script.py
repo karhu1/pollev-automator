@@ -74,9 +74,11 @@ time.sleep(5)
 
 print('running scripts...\n')
 
-driver.execute_script("""
+
+def refresh_observer():
+  driver.execute_script("""
   window.changeLog = [];
-  const target = document.querySelector('#participate_presenter_lauramcg');
+  const target = document.querySelector('main');
 
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -87,6 +89,8 @@ driver.execute_script("""
   observer.observe(target, { childList: true, subtree: true, characterData: true });
 
 """)
+
+refresh_observer()
 
 def fetch_changes():
   changes = driver.execute_script("""
@@ -107,6 +111,7 @@ while True:
     buttons = driver.find_elements(By.CLASS_NAME, 'component-response-multiple-choice__option__vote')
     if buttons:
       buttons[random.randint(0, len(buttons)-1)].click()
+    refresh_observer()
   time.sleep(2)
 
 driver.close()
